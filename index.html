@@ -46,9 +46,18 @@ body{
 
 /* ---- logo / header ---- */
 .top{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px;min-width:0}
-.brandmark{height:58px;width:auto;flex:none;filter:drop-shadow(0 6px 14px color-mix(in srgb,var(--accent) 30%,transparent))}
-@media (max-width:520px){ .brandmark{height:46px} }
+.brand{display:flex;align-items:center;gap:13px;min-width:0}
+.brand-icon{height:48px;width:48px;flex:none;filter:drop-shadow(0 6px 14px color-mix(in srgb,var(--accent) 32%,transparent))}
+.brand-text{min-width:0}
+.wordmark{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1;white-space:nowrap;color:var(--text)}
+.wordmark .go{color:#FF5500;font-style:italic}
+.wordmark .dom{color:var(--faint);font-weight:500;font-size:17px}
+.tagline{margin:3px 0 0;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:700;white-space:nowrap}
+@media (max-width:520px){
+  .brand-icon{height:38px;width:38px}
+  .wordmark{font-size:20px}
+  .tagline{font-size:9px;letter-spacing:.1em}
+}
 .head-r{display:flex;align-items:center;gap:8px}
 .ghost{border:1px solid var(--line);background:var(--panel);color:var(--muted);font:inherit;font-size:12.5px;font-weight:600;
   padding:9px 12px;border-radius:11px;cursor:pointer;transition:.18s}
@@ -115,44 +124,38 @@ kbd{font:inherit;font-size:9.5px;font-weight:700;border:1px solid var(--line);bo
 
   <div class="top">
     <div class="brand">
-      <svg class="brandmark" viewBox="0 0 600 220" role="img" aria-label="Organizasyongo.com logosu">
+      <svg class="brand-icon" viewBox="0 0 100 100" role="img" aria-hidden="true">
         <defs>
           <linearGradient id="petalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#FF5500"/>
             <stop offset="100%" stop-color="#FFAA00"/>
           </linearGradient>
         </defs>
-        <style>
-          .brand-black{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:800;fill:var(--text);font-size:42px;letter-spacing:-1px}
-          .brand-orange{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:800;fill:#FF5500;font-size:42px;letter-spacing:-1px}
-          .brand-domain{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:400;fill:var(--faint);font-size:24px}
-          .brand-sub{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:500;fill:var(--faint);font-size:11px;letter-spacing:3.5px}
-        </style>
-        <g transform="translate(300, 45)">
+        <g transform="translate(50, 50)">
           <g fill="url(#petalGrad)">
-            <rect x="-5" y="-32" width="10" height="22" rx="5"/>
-            <rect x="-5" y="-32" width="10" height="22" rx="5" transform="rotate(45)"/>
-            <rect x="-5" y="-32" width="10" height="22" rx="5" transform="rotate(90)"/>
-            <rect x="-5" y="-32" width="10" height="22" rx="5" transform="rotate(135)"/>
-            <rect x="-5" y="-32" width="10" height="22" rx="5" transform="rotate(180)"/>
-            <rect x="-5" y="-32" width="10" height="22" rx="5" transform="rotate(225)"/>
-            <rect x="-5" y="-32" width="10" height="22" rx="5" transform="rotate(270)"/>
-            <rect x="-5" y="-32" width="10" height="22" rx="5" transform="rotate(315)"/>
+            <rect x="-6" y="-38" width="12" height="26" rx="6"/>
+            <rect x="-6" y="-38" width="12" height="26" rx="6" transform="rotate(45)"/>
+            <rect x="-6" y="-38" width="12" height="26" rx="6" transform="rotate(90)"/>
+            <rect x="-6" y="-38" width="12" height="26" rx="6" transform="rotate(135)"/>
+            <rect x="-6" y="-38" width="12" height="26" rx="6" transform="rotate(180)"/>
+            <rect x="-6" y="-38" width="12" height="26" rx="6" transform="rotate(225)"/>
+            <rect x="-6" y="-38" width="12" height="26" rx="6" transform="rotate(270)"/>
+            <rect x="-6" y="-38" width="12" height="26" rx="6" transform="rotate(315)"/>
           </g>
-          <circle cx="0" cy="0" r="10" fill="#FFFFFF"/>
-          <circle cx="0" cy="0" r="6" fill="#111111"/>
+          <circle cx="0" cy="0" r="12" fill="#FFFFFF"/>
+          <circle cx="0" cy="0" r="7" fill="#111111"/>
         </g>
-        <text x="300" y="125" text-anchor="middle">
-          <tspan class="brand-black">Organizasyon</tspan><tspan class="brand-orange">go</tspan><tspan class="brand-domain">.com</tspan>
-        </text>
-        <text x="300" y="152" text-anchor="middle" class="brand-sub">DİJİTAL ETKİNLİK VE ORGANİZASYON PLATFORMU</text>
       </svg>
+      <div class="brand-text">
+        <div class="wordmark">Organizasyon<span class="go">go</span><span class="dom">.com</span></div>
+        <p class="tagline">Dijital Etkinlik ve Organizasyon Platformu</p>
+      </div>
     </div>
     <div class="head-r">
       <span class="pill"><span class="dot"></span>Yol Haritası</span>
       <button class="ghost" id="themeBtn" title="Açık / koyu tema">🌓</button>
-      <button class="ghost" id="resetBtn" title="Varsayılan duruma dön">↺ Sıfırla</button>
     </div>
+
   </div>
 
   <div class="summary">
@@ -280,12 +283,6 @@ document.addEventListener('keydown',e=>{
   if(e.metaKey||e.ctrlKey||e.altKey) return;
   if(/^[0-9]$/.test(e.key)){ const n=e.key==='0'?10:+e.key; if(phases.some(p=>p.id===n)) cycle(n); }
 });
-$('resetBtn').onclick=async()=>{
-  if(!confirm('Tüm aşamalar başlangıç durumuna döndürülsün mü? Bu, herkeste değişir.')) return;
-  phases=PHASES.map(p=>({...p,ts:null})); render();
-  for(const p of PHASES){ await pushStatus(p.id,p.status); }
-  fetchStatuses();
-};
 $('themeBtn').onclick=()=>{
   const cur=document.documentElement.getAttribute('data-theme')
     || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
