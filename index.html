@@ -172,7 +172,7 @@ kbd{font:inherit;font-size:9.5px;font-weight:700;border:1px solid var(--line);bo
   </div>
 
   <div class="board" id="board"></div>
-  <div class="foot-note">Durum rozetine tıkla: Bekliyor → Devam ediyor → Tamamlandı · <kbd>1</kbd>–<kbd>9</kbd>, <kbd>0</kbd> ile de aşama durumu değişir · Değişiklikler herkeste görünür. <span id="connState" style="color:var(--warn)"></span></div>
+  <div class="foot-note">Durum rozetine tıkla: Bekliyor → Devam ediyor → Tamamlandı · <kbd>1</kbd>–<kbd>9</kbd>, <kbd>0</kbd> ile de aşama durumu değişir · Sayfa kendini otomatik günceller, F5 gerekmez. <span id="connState" style="color:var(--warn)"></span></div>
 </div>
 
 <script>
@@ -201,6 +201,7 @@ const fmt=ts=>ts?new Date(ts).toLocaleDateString('tr-TR',{day:'2-digit',month:'s
 const API='/api/status';
 let phases=PHASES.map(p=>({...p,ts:null}));
 let lastKnown=null;
+let pendingWrites=0;
 
 async function fetchStatuses(){
   try{
@@ -219,6 +220,7 @@ async function fetchStatuses(){
   }
 }
 async function pushStatus(id,status){
+  pendingWrites++;
   try{
     const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,status})});
     if(!r.ok) throw new Error('status '+r.status);
@@ -227,6 +229,8 @@ async function pushStatus(id,status){
   }catch(e){
     console.warn('Kaydedilemedi:',e);
     setConn(false);
+  }finally{
+    pendingWrites--;
   }
 }
 function setConn(ok){
@@ -293,7 +297,14 @@ try{ const th=localStorage.getItem(TKEY); if(th) document.documentElement.setAtt
 
 render();               // varsayılan verilerle hemen göster
 fetchStatuses();        // sunucudaki gerçek durumu çek
-setInterval(fetchStatuses,8000); // diğer kullanıcıların değişikliklerini yakalamak için periyodik kontrol
+
+// Sayfa kendini periyodik olarak baştan yeniler (gerçek F5 gibi).
+// Bu, akıllı kısmi güncellemeden farklı olarak her şeyi (durumlar +
+// yeni bir deploy varsa yeni kod) garanti şekilde taze alır.
+setInterval(()=>{
+  if(pendingWrites>0) return; // az önce tıklanan bir durum kaydı bitmeden yenileme
+  location.reload();
+}, 10000);
 
 </script>
 </body>
